@@ -23,12 +23,39 @@ class Solution {
             return true;
         }
         
+        if(helper(curHead.next)){
+        	if(curHead.val == frontNode.val){
+        		frontNode = frontNode.next;
+        		return true;
+        	}else{
+        		return false;
+        	}
 
-        if(helper(curHead.next) == false) return false;
-        if(curHead.val != frontNode.val) return false;
-        frontNode = frontNode.next;
+        }else{
+        	return false;
+        }
+    }
+}
+
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        if (head == null || head.next == null) return true;
+        return isPalindrome(head, head) != null;
+    }
+
+
+    private ListNode isPalindrome(ListNode cur, ListNode head){
+        if(cur == null) return head;
+
+        ListNode correspond = isPalindrome(cur.next, head);
+        if(correspond != null && cur.val == correspond.val){
+            if(correspond.next == null) return correspond;
+            return correspond.next;
+
+        }else{
+            return null;
+        }
         
-        return true;
     }
 }
 //      method 1:ArrayList
